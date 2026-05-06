@@ -1,0 +1,118 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "flask-boss"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "apscheduler>=3.11.2",
+    "beautifulsoup4>=4.14.3",
+    "flask>=3.1.1",
+    "flask-babel>=4.0.0",
+    "flask-jwt-extended>=4.7.1",
+    "flask-limiter>=3.12",
+    "flask-migrate>=4.1.0",
+    "flask-sqlalchemy>=3.1.1",
+    "gunicorn>=23.0.0",
+    "pillow>=11.3.0",
+    "playwright>=1.58.0",
+    "pydantic[email]>=2.12.5",
+    "pymysql[rsa]>=1.1.2",
+    "pytest>=8.4.1",
+    "pytest-cov>=7.1.0",
+    "python-dotenv>=1.1.1",
+    "redis",
+    "requests>=2.32.5",
+]
+
+[[tool.uv.index]]
+url = "https://mirrors.aliyun.com/pypi/simple"
+default = true
+
+[tool.setuptools.packages.find]
+include = ["app", "app.*"]
+exclude = ["tests", "tests.*", "docs", "docs.*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-ra"
+markers = [
+    "unit: unit tests for pure functions and small logic",
+    "integration: integration tests for Flask request flow",
+    "orm: ORM and transaction behavior tests",
+]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+]
+
+[dependency-groups]
+dev = [
+    "mypy>=1.20.1",
+    "pre-commit>=4.5.1",
+    "ruff>=0.15.10",
+    "types-requests>=2.32.4.20250913",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+exclude = [
+    ".git",
+    ".venv",
+    ".pytest_cache",
+    "__pycache__",
+    "migrations",
+    "flask_boss.egg-info",
+]
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "F",
+    "I",
+    "B",
+    "UP",
+    "SIM",
+    "RET",
+    "ARG",
+    "RUF",
+]
+ignore = [
+    "E501",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["ARG001"]
+
+[tool.ruff.format]
+quote-style = "single"
+indent-style = "space"
+line-ending = "lf"
+
+[tool.mypy]
+python_version = "3.12"
+warn_return_any = true
+warn_unused_configs = true
+check_untyped_defs = true
+disallow_untyped_defs = false
+no_implicit_optional = true
+exclude = [
+    "migrations/",
+    "tests/",
+]
+
+[[tool.mypy.overrides]]
+module = [
+    "redis.*",
+    "flask_limiter.*",
+    "flask_migrate.*",
+    "apscheduler.*",
+]
+ignore_missing_imports = true

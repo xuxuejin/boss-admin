@@ -10,8 +10,10 @@ dist/
 
 # PyCharm
 .idea/
-.idea/*
 !*.iml
+
+# vscode
+.vscode
 
 # System
 .DS_Store

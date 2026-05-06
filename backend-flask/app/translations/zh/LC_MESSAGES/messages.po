@@ -1,0 +1,178 @@
+# Chinese translations for PROJECT.
+# Copyright (C) 2026 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-04-16 02:51+0800\n"
+"PO-Revision-Date: 2026-04-16 02:52+0800\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh\n"
+"Language-Team: zh <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: app/errors.py:18 app/utils/request.py:26
+msgid "Invalid request parameters"
+msgstr "请求参数错误"
+
+#: app/errors.py:28
+msgid "Resource conflict"
+msgstr "资源冲突"
+
+#: app/errors.py:38
+msgid "Data conflict, please check unique constraints or relations"
+msgstr "数据冲突，请检查唯一约束或关联关系"
+
+#: app/errors.py:48
+msgid "Database operation failed"
+msgstr "数据库操作失败"
+
+#: app/errors.py:59 app/utils/auth.py:44
+msgid "Invalid login token"
+msgstr "无效的登录令牌"
+
+#: app/errors.py:70
+msgid "Cache service error"
+msgstr "缓存服务异常"
+
+#: app/errors.py:83
+msgid "Bad request"
+msgstr "错误的请求"
+
+#: app/errors.py:84
+msgid "Unauthorized"
+msgstr "未授权"
+
+#: app/errors.py:85
+msgid "Forbidden"
+msgstr "禁止访问"
+
+#: app/errors.py:86
+msgid "Not found"
+msgstr "未找到资源"
+
+#: app/errors.py:87
+msgid "Method not allowed"
+msgstr "请求方法不被允许"
+
+#: app/errors.py:88
+msgid "Conflict"
+msgstr "资源冲突"
+
+#: app/errors.py:89
+msgid "Too many requests"
+msgstr "请求过于频繁"
+
+#: app/errors.py:90 app/errors.py:107
+msgid "Internal server error"
+msgstr "服务器内部错误"
+
+#: app/errors.py:96
+msgid "Request failed"
+msgstr "请求失败"
+
+#: app/schemas/department.py:21
+msgid "Invalid phone number format"
+msgstr "手机号格式不正确"
+
+#: app/utils/auth.py:43 app/views/auth.py:87
+msgid "Login has expired, please log in again"
+msgstr "登录已过期，请重新登录"
+
+#: app/utils/request.py:14
+#, python-format
+msgid "Missing required field: %(field)s"
+msgstr "缺少必填字段：%(field)s"
+
+#: app/utils/request.py:16
+#, python-format
+msgid "Field '%(field)s' is too short"
+msgstr "字段 '%(field)s' 长度过短"
+
+#: app/utils/request.py:18
+#, python-format
+msgid "Field '%(field)s' is too long"
+msgstr "字段 '%(field)s' 长度过长"
+
+#: app/utils/request.py:20
+#, python-format
+msgid "Field '%(field)s' is too small"
+msgstr "字段 '%(field)s' 的值过小"
+
+#: app/utils/request.py:22
+#, python-format
+msgid "Field '%(field)s' must be an integer"
+msgstr "字段 '%(field)s' 必须是整数"
+
+#: app/utils/request.py:24
+msgid "Invalid value"
+msgstr "无效的值"
+
+#: app/utils/request.py:32
+msgid "Request body must be valid JSON"
+msgstr "请求体必须是合法 JSON"
+
+#: app/utils/request.py:34
+msgid "Request body must be a JSON object"
+msgstr "请求体必须是 JSON 对象"
+
+#: app/utils/request.py:68
+msgid "Form data cannot be empty"
+msgstr "表单数据不能为空"
+
+#: app/utils/request.py:87
+#, python-format
+msgid "Missing uploaded file: %(name)s"
+msgstr "缺少上传文件：%(name)s"
+
+#: app/views/auth.py:32
+msgid "Invalid captcha"
+msgstr "验证码不正确"
+
+#: app/views/auth.py:55
+msgid "Login successful"
+msgstr "登录成功"
+
+#: app/views/auth.py:65
+msgid "Invalid username or password"
+msgstr "用户名或密码不正确"
+
+#: app/views/auth.py:97 app/views/captcha.py:40 app/views/user.py:50
+msgid "Success"
+msgstr "成功"
+
+#: app/views/auth.py:111 app/views/auth.py:140 app/views/user.py:63
+#: app/views/user.py:77
+msgid "This endpoint is not implemented yet"
+msgstr "该接口暂未实现"
+
+#: app/views/auth.py:125
+msgid "Logout successful"
+msgstr "退出登录成功"
+
+#: app/views/captcha.py:26
+msgid "Failed to generate captcha due to server error"
+msgstr "由于服务器错误，验证码生成失败"
+
+#: app/views/captcha.py:33
+msgid "Failed to generate captcha"
+msgstr "验证码生成失败"
+
+#: app/views/department.py:25
+msgid "Departments fetched successfully"
+msgstr "部门列表获取成功"
+
+#: app/views/department.py:49
+msgid "Department created successfully"
+msgstr "部门创建成功"
+
+#: app/views/user.py:43
+msgid "User not found"
+msgstr "用户不存在"
