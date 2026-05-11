@@ -2,13 +2,13 @@ from flask_babel import gettext as _
 
 from app.enums.response_codes import BizCode, HttpStatus
 from app.exceptions import BizError, StorageUploadError
-from app.repositories import user_repository
+from app.repositories import user as user_repo
 from app.storage.factory import build_image_storage
 from app.utils.db import session_scope
 
 
 def get_current_user(user_id: int):
-    user = user_repository.get_detail_by_id(user_id)
+    user = user_repo.get_detail_by_id(user_id)
     if not user:
         raise BizError(
             code=BizCode.USER_NOT_FOUND,
@@ -21,7 +21,7 @@ def get_current_user(user_id: int):
 
 def upload_current_user_avatar(user_id: int, file):
     with session_scope() as session:
-        user = user_repository.get_by_id(user_id)
+        user = user_repo.get_by_id(user_id)
         if not user:
             raise BizError(
                 code=BizCode.USER_NOT_FOUND,

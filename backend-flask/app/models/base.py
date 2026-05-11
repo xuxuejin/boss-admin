@@ -1,6 +1,6 @@
 from datetime import UTC, datetime
 
-from ..extensions import db
+from app.extensions import db
 
 
 class BaseModelMixin(db.Model):

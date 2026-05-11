@@ -4,12 +4,12 @@ from sqlalchemy.exc import IntegrityError
 from app.exceptions import BizError
 from app.enums.response_codes import BizCode, HttpStatus
 from app.models.department import Department
-from app.repositories import department_repository
+from app.repositories import department as department_repo
 from app.utils.db import session_scope
 
 
 def list_departments():
-    departments = department_repository.list_all()
+    departments = department_repo.list_all()
     return {
         "data": [dept.to_dict() for dept in departments],
         "message": _("Departments fetched successfully"),
@@ -29,7 +29,7 @@ def create_department(payload):
 
     try:
         with session_scope() as session:
-            department_repository.add(department, session=session)
+            department_repo.add(department, session=session)
             session.flush()
             session.refresh(department)
     except IntegrityError as exc:
@@ -48,7 +48,7 @@ def create_department(payload):
 def update_department(dp_id, payload):
     try:
         with session_scope() as session:
-            department = department_repository.get_by_id(dp_id, session)
+            department = department_repo.get_by_id(dp_id, session)
             if not department:
                 raise BizError(
                     code=BizCode.DEPARTMENT_NOT_FOUND,
@@ -75,7 +75,7 @@ def update_department(dp_id, payload):
 
             # 如果指定了父部门，校验父部门是否存在
             if parent_id is not None:
-                parent_department = department_repository.get_by_id(parent_id, session=session)
+                parent_department = department_repo.get_by_id(parent_id, session=session)
                 if not parent_department:
                     raise BizError(
                         code=BizCode.INVALID_PARAMS,
@@ -83,7 +83,7 @@ def update_department(dp_id, payload):
                         status=HttpStatus.BAD_REQUEST,
                     )
 
-            department_repository.update(department, payload)
+            department_repo.update(department, payload)
             session.flush()  # 把当前 session 里的改动发到数据库，但还没 commit
             session.refresh(department)  # 把数据库里的最新值重新读回当前对象，让内存里的对象和数据库保持一致
             # 走出 with 后 session.commit()

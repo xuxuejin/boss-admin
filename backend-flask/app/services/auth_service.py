@@ -3,7 +3,7 @@ from flask_jwt_extended import create_access_token
 
 from app.exceptions import BizError
 from app.enums.response_codes import BizCode, HttpStatus
-from app.repositories import user_repository
+from app.repositories import user as user_repo
 from app.utils.captcha import Captcha
 
 
@@ -16,7 +16,7 @@ def login(payload, redis_client):
             status=HttpStatus.OK,
         )
 
-    user = user_repository.get_by_username(payload.username)
+    user = user_repo.get_by_username(payload.username)
     if not user or not user.check_password(payload.password):
         raise BizError(
             code=BizCode.USER_OR_PASSWORD_ERROR,
@@ -28,7 +28,7 @@ def login(payload, redis_client):
 
 
 def get_session_user(user_id: int):
-    user = user_repository.get_by_id(user_id)
+    user = user_repo.get_by_id(user_id)
     if not user:
         raise BizError(
             code=BizCode.USER_NOT_FOUND,

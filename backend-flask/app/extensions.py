@@ -1,6 +1,3 @@
-import os
-
-from apscheduler.schedulers.background import BackgroundScheduler
 from flask_jwt_extended import JWTManager
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
@@ -48,7 +45,6 @@ limiter = Limiter(
     key_func=get_remote_address,
     default_limits=['100 per minute'],  # 设置默认的全局限速 每分钟100次
 )
-scheduler = BackgroundScheduler(timezone='UTC')
 
 
 def setup_extensions(app):
@@ -78,47 +74,11 @@ def setup_extensions(app):
 
     register_commands(app)
 
-    # 定时脚本
-    # init_scheduler(app)
-
 
 def register_commands(app):
-    from .commands import init_db_command, test_command
+    from .commands import crawl_mattress_command, init_db_command, run_scheduler_command, test_command
 
+    app.cli.add_command(crawl_mattress_command)
     app.cli.add_command(init_db_command)
+    app.cli.add_command(run_scheduler_command)
     app.cli.add_command(test_command)
-
-
-def init_scheduler(app):
-    """
-    初始化 APScheduler
-    """
-    from app.tasks.crawl_task import crawl_mattress_job
-
-    # 防止 debug 模式重复启动
-    if app.debug and os.environ.get('WERKZEUG_RUN_MAIN') != 'true':
-        return
-
-    if scheduler.running:
-        return
-
-    scheduler.add_job(
-        func=lambda: run_with_context(app, crawl_mattress_job),
-        trigger='interval',
-        hours=6,
-        id='crawl_mattress',
-        replace_existing=True,
-    )
-
-    scheduler.start()
-    app.logger.info('APScheduler started.')
-    # ⭐ 启动立即执行一次
-    run_with_context(app, crawl_mattress_job)
-
-
-def run_with_context(app, job_func):
-    """
-    保证 scheduler job 在 Flask app context 中执行
-    """
-    with app.app_context():
-        job_func()

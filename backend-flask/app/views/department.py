@@ -1,4 +1,5 @@
 from flask import Blueprint
+
 from app.enums.response_codes import BizCode
 from app.schemas.department import DepartmentCreateSchema, DepartmentUpdateSchema
 from app.services import department_service
@@ -13,8 +14,8 @@ def get_departments():
     result = department_service.list_departments()
     return success(
         code=BizCode.SUCCESS,
-        message=result["message"],
-        data=result["data"],
+        message=result['message'],
+        data=result['data'],
     )
 
 
@@ -25,8 +26,8 @@ def add_department():
 
     return success(
         code=BizCode.SUCCESS,
-        message=result["message"],
-        data=result["data"],
+        message=result['message'],
+        data=result['data'],
     )
 
 
@@ -37,8 +38,8 @@ def update_department(department_id):
 
     return success(
         code=BizCode.SUCCESS,
-        message=result["message"],
-        data=result["data"],
+        message=result['message'],
+        data=result['data'],
     )
 
 
@@ -49,6 +50,6 @@ def patch_department(department_id):
 
     return success(
         code=BizCode.SUCCESS,
-        message=result["message"],
-        data=result["data"],
+        message=result['message'],
+        data=result['data'],
     )

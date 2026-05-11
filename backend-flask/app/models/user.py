@@ -1,6 +1,7 @@
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from ..extensions import db
+from app.extensions import db
+
 from .base import BaseModelMixin
 
 # 多对多关联表:用户和角色

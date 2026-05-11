@@ -35,6 +35,7 @@ class BizCode(IntEnum):
     # Token 错误
     TOKEN_INVALID = 3001  # Token 无效
     TOKEN_EXPIRED = 3002  # Token 过期
+    PERMISSION_DENIED = 3003  # 权限不足
     # 系统内部错误
     INTERNAL_ERROR = 4001  # 系统内部错误
     DB_ERROR = 4002  # 数据库错误

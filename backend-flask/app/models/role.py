@@ -31,3 +31,15 @@ class Role(BaseModelMixin, db.Model):
 
     def __repr__(self):
         return f'<Role {self.name}>'
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'role_code': self.role_code,
+            'name': self.name,
+            'permission_char': self.permission_char,
+            'create_time': self.create_time_ts,
+            'update_time': self.update_time_ts,
+            'create_by': self.create_by,
+            'update_by': self.update_by,
+        }
