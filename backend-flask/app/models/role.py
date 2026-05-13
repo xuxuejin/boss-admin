@@ -1,5 +1,5 @@
-# from .. import db
-from ..extensions import db
+from app.extensions import db
+
 from .base import BaseModelMixin
 
 # 多对多关联表:角色和菜单

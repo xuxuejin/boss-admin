@@ -5,7 +5,7 @@ from sqlalchemy.exc import SQLAlchemyError
 
 from app.enums.response_codes import BizCode, HttpStatus
 from app.extensions import db, redis_client
-from app.utils.auth import public_route
+from app.security.auth import public_route
 from app.utils.response import error, success
 
 health_bp = Blueprint('health', __name__, url_prefix='/health')

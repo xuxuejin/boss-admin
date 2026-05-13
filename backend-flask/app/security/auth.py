@@ -75,28 +75,3 @@ def jwt_required_if_not_public():
     g.current_user = user
     # 校验通过 返回 None 表示继续执行视图函数
     return None
-
-
-def require_admin():
-    """
-    校验当前用户是否为管理员。
-    依赖 jwt_required_if_not_public 在 before_request 中写入的 g.current_user。
-    """
-    user = getattr(g, 'current_user', None)
-    if not user:
-        return error_response(
-            code=BizCode.USER_NOT_FOUND,
-            data=None,
-            message=_('User not found'),
-            status=HttpStatus.NOT_FOUND,
-        )
-
-    if not user.is_admin:
-        return error_response(
-            code=BizCode.PERMISSION_DENIED,
-            data=None,
-            message=_('Permission denied'),
-            status=HttpStatus.FORBIDDEN,
-        )
-
-    return None

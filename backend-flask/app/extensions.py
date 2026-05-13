@@ -4,6 +4,7 @@ from flask_limiter.util import get_remote_address
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from redis import Redis, RedisError
+from sqlalchemy.orm import DeclarativeBase
 
 from app.errors import register_error_handlers
 
@@ -36,8 +37,12 @@ class RedisExtension:
         return getattr(self._client, name)
 
 
+class Base(DeclarativeBase):
+    pass
+
+
 # 实例化所有扩展对象
-db = SQLAlchemy()
+db = SQLAlchemy(model_class=Base)
 migrate = Migrate()
 jwt = JWTManager()
 redis_client = RedisExtension()
@@ -76,7 +81,12 @@ def setup_extensions(app):
 
 
 def register_commands(app):
-    from .commands import crawl_mattress_command, init_db_command, run_scheduler_command, test_command
+    from .commands import (
+        crawl_mattress_command,
+        init_db_command,
+        run_scheduler_command,
+        test_command,
+    )
 
     app.cli.add_command(crawl_mattress_command)
     app.cli.add_command(init_db_command)

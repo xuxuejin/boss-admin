@@ -6,7 +6,7 @@ from flask import Flask, g, request
 from .config import get_config
 from .extensions import setup_extensions
 from .i18n import init_i18n
-from .utils.auth import jwt_required_if_not_public
+from .security.auth import jwt_required_if_not_public
 from .utils.logger import setup_logger
 from .views import register_blueprints
 

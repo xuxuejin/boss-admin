@@ -34,7 +34,7 @@ class BaseModelMixin(db.Model):
             return None
         if dt.tzinfo is None:
             # 数据库存的是无时区时间 2026-04-14 09:27:38 没有时区信息
-            # 如果直接对“无时区 datetime”做 .timestamp() Python 会按服务器本地时区解释，结果可能偏 8 小时
+            # 如果直接对“无时区 datetime”做 .timestamp() Python 会按服务器本地时区解释 结果可能偏 8 小时
             dt = dt.replace(tzinfo=UTC)  # 恢复 UTC 语义
         return int(dt.timestamp() * 1000)
 

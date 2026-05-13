@@ -89,10 +89,10 @@ class User(BaseModelMixin, db.Model):
             value = getattr(self, field, None)
 
             # 特殊字段处理
-            if field == 'roles':
-                data['roles'] = [role.name for role in self.roles] if self.roles else []
-            elif field == 'position_id':
-                data['position_id'] = self.position_id
+            # if field == 'roles':
+            #     data['roles'] = [role.name for role in self.roles] if self.roles else []
+            if field == 'position_id':
+                # data['position_id'] = self.position_id
                 data['position_name'] = self.positions.name if self.positions else None
             else:
                 data[field] = value

@@ -2,9 +2,22 @@ from flask_babel import gettext as _
 
 from app.enums.response_codes import BizCode, HttpStatus
 from app.exceptions import BizError, StorageUploadError
+from app.models.user import User
 from app.repositories import user as user_repo
 from app.storage.factory import build_image_storage
 from app.utils.db import session_scope
+
+
+def _get_user_role_codes(user: User) -> list[str]:
+    return [role.role_code for role in user.roles if role.role_code]
+
+
+def _get_user_permissions(user: User) -> list[str]:
+    if user.is_admin:
+        return ['*:*:*']
+    permissions = []
+    # for role in user.roles:
+    return []
 
 
 def get_current_user(user_id: int):
@@ -16,7 +29,11 @@ def get_current_user(user_id: int):
             status=HttpStatus.NOT_FOUND,
         )
 
-    return user.to_dict()
+    return {
+        'user': user.to_dict(),
+        'roles': _get_user_role_codes(user),
+        'permissions': _get_user_permissions(user),
+    }
 
 
 def upload_current_user_avatar(user_id: int, file):
